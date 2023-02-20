@@ -2,7 +2,6 @@ import { SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import CardPokemon from "../componentes/CardPokemon";
 import Paginação from "../componentes/Paginacao";
-import Pesquisar from "../componentes/Pesquisar";
 import Titulo from "../componentes/Titulo";
 import api from "../service/api";
 
@@ -31,15 +30,8 @@ export default function PaginaListagemPokemons() {
   };
 
   useEffect(() => {
-    getPokemon(0, 12);
+    getPokemon(0, 12).sort();
   }, []);
-
-  const aoPesquisar = (valor) => {
-    let valorEncontrado = pokemons.find(valor);
-    if (valor === valorEncontrado) {
-      console.log("encontrou o valor");
-    }
-  };
 
   const aoVoltar = () => {
     const url = new URL(voltar);
@@ -64,7 +56,6 @@ export default function PaginaListagemPokemons() {
   return (
     <div className="App">
       <Titulo />
-      <Pesquisar pesquisar={aoPesquisar} />
       {/* passando por props a função criada no pai */}
       <div className="Pokemons">
         <SimpleGrid columns={6} spacing={50}>
