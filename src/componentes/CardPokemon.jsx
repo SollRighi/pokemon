@@ -40,7 +40,7 @@ export default function CardPokemon({ nome }) {
   }, []);
 
   if (!pokemon) {
-    return <h5 style={{ color: "white" }}>Pokemon não encontrado</h5>;
+    return null;
   }
 
   return (
@@ -48,7 +48,7 @@ export default function CardPokemon({ nome }) {
       <img
         src={pokemon.sprites.front_default}
         alt="imagemPokemon"
-        style={{ width: "200px" }}
+        style={{ width: "100px" }}
       />
       {pokemon.name}
     </StyleCard>

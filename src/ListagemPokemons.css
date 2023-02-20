@@ -1,19 +1,20 @@
 .App {
-  background-color: black;
-  /* background: rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(136, 136, 136, 1) 100%
-  ); */
-  min-height: 100vh;
+    rgba(25, 0, 116, 1) 50%,
+    rgba(240, 241, 242, 1) 100%
+  );
+  /* min-height: 100vh; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .Pokemons {
-  min-height: 100vw;
+  /* min-height: 100vw; */
   display: flex;
   align-items: center;
   justify-content: center;
