@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { ListItem, UnorderedList } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import api from "../service/api";
