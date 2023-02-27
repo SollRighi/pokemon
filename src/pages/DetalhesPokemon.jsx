@@ -2,7 +2,10 @@ import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import CaracteristicasFisicasPokemon from "../componentes/CaracteristicasFisicasPokemon";
 import CardHabilidadesPokemon from "../componentes/CardHabilidadesPokemon";
+import ModalMovesPokemon from "../componentes/ModalMovesPokemon";
+import StatisticasPokemon from "../componentes/StatisticasPokemon";
 import api from "../service/api";
 
 const StyleBody = styled.div`
@@ -14,19 +17,42 @@ const StyleBody = styled.div`
   );
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 50px;
+  gap: 10px;
+  padding: 0 250px;
+`;
+const StyleDetalhes = styled.div`
+  display: flex;
+  gap: 100px;
 `;
 const StyleImagem = styled.img`
-  width: 500px;
+  width: 200px;
+  object-fit: contain;
 `;
-const StyleTextos = styled.div`
+const StyleTexto = styled.div`
   width: 500px;
   display: flex;
   flex-direction: column;
-  color: #3f3f3f;
-  text-transform: capitalize;
+  gap: 5px;
+`;
+
+const StyleCaracteristicas = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #7474d3;
+  border-radius: 15px;
+`;
+
+const StyleTituloEstatistica = styled.div`
+  align-self: flex-start;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const StyleEstatisticas = styled.div`
+  display: flex;
+  gap: 20px;
 `;
 
 export default function DetalhesPokemon() {
@@ -55,22 +81,70 @@ export default function DetalhesPokemon() {
 
   return (
     <StyleBody>
-      <StyleImagem src={pokemon.sprites.front_default} alt="imagemPokemon" />
-      <StyleTextos>
-        <Text fontSize="50px" color="Black" textAlign={"center"}>
-          {pokemon.name}
-        </Text>
-        <Text fontSize="35px" color="black">
-          Efeitos
-        </Text>
-        <h2>{pokemon.experiencia}</h2>
-        {pokemon.abilities.map((habilidade, key) => (
-          <CardHabilidadesPokemon
-            habilidadePokemon={habilidade.ability.name}
+      <Text
+        fontSize="50px"
+        color="Black"
+        textAlign={"center"}
+        paddingTop={"20px"}
+        text-transform={"capitalize"}
+      >
+        {pokemon.name}
+      </Text>
+      <StyleDetalhes>
+        <StyleImagem src={pokemon.sprites.front_default} alt="imagemPokemon" />
+        <StyleTexto>
+          {pokemon.abilities.map((habilidade, key) => (
+            <CardHabilidadesPokemon
+              habilidadePokemon={habilidade.ability.name}
+              key={key}
+            />
+          ))}
+          <StyleCaracteristicas>
+            <CaracteristicasFisicasPokemon
+              titulo={"Height"}
+              valor={pokemon.height + " m"}
+            />
+            <CaracteristicasFisicasPokemon
+              titulo={"Weight"}
+              valor={pokemon.weight + " kg"}
+            />
+            <CaracteristicasFisicasPokemon
+              titulo={"Experience"}
+              valor={pokemon.base_experience}
+            />
+            <CaracteristicasFisicasPokemon
+              titulo={"Moves"}
+              valor={pokemon.base_experience}
+            />
+            <CaracteristicasFisicasPokemon
+              titulo={"Types"}
+              valor={
+                <ul>
+                  {pokemon.types.map((tipos) => (
+                    <li style={{ textTransform: "capitalize" }}>
+                      {tipos.type.name}
+                    </li>
+                  ))}
+                </ul>
+              }
+            />
+
+            <ModalMovesPokemon movimentos={pokemon.moves} />
+          </StyleCaracteristicas>
+        </StyleTexto>
+      </StyleDetalhes>
+      <StyleTituloEstatistica>
+        <p>Stats</p>
+      </StyleTituloEstatistica>
+      <StyleEstatisticas>
+        {pokemon.stats.map((estatistica, key) => (
+          <StatisticasPokemon
+            titulo={estatistica.stat.name}
+            valor={estatistica.base_stat}
             key={key}
           />
         ))}
-      </StyleTextos>
+      </StyleEstatisticas>
     </StyleBody>
   );
 }

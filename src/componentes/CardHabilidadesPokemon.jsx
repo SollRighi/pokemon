@@ -27,7 +27,7 @@ export default function CardHabilidadesPokemon({ habilidadePokemon }) {
 
   return (
     <StyleHabilidades>
-      <UnorderedList fontSize="25px" color="#3f3f3f">
+      <UnorderedList fontSize="16px" color="#3f3f3f">
         {habilidade.effect_entries
           .filter((efeito) => efeito.language.name === "en")
           .map((efeito) => (

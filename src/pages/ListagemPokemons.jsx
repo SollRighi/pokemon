@@ -30,7 +30,7 @@ export default function PaginaListagemPokemons() {
   };
 
   useEffect(() => {
-    getPokemon(0, 12).sort();
+    getPokemon(0, 12);
   }, []);
 
   const aoVoltar = () => {
