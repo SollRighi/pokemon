@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import api from "../service/api";
@@ -26,7 +26,7 @@ export default function CardPokemon({ nome }) {
 
   const [pokemon, setPokemon] = useState();
 
-  const getDetalhesPokemon = () => {
+  const getDetalhesPokemon = useCallback(() => {
     api
       .get(`/pokemon/${nome}`)
       .then(({ data }) => {
@@ -35,11 +35,11 @@ export default function CardPokemon({ nome }) {
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
-  };
+  }, [nome]);
 
   useEffect(() => {
     getDetalhesPokemon();
-  }, []);
+  }, [getDetalhesPokemon]);
 
   if (!pokemon) {
     return null;

@@ -1,5 +1,5 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import api from "../service/api";
 
@@ -10,15 +10,15 @@ const StyleHabilidades = styled.div`
 export default function CardHabilidadesPokemon({ habilidadePokemon }) {
   const [habilidade, setHabilidade] = useState();
 
-  const getHabilidadesPokemon = () => {
+  const getHabilidadesPokemon = useCallback(() => {
     api.get(`/ability/${habilidadePokemon}/`).then(({ data }) => {
       setHabilidade(data);
     });
-  };
+  }, [habilidadePokemon]);
 
   useEffect(() => {
     getHabilidadesPokemon();
-  }, []);
+  }, [getHabilidadesPokemon]);
 
   if (!habilidade) {
     return <h5 style={{ color: "white" }}>Habilidade não encontrada</h5>;

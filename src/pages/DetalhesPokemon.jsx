@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CaracteristicasFisicasPokemon from "../componentes/CaracteristicasFisicasPokemon";
@@ -60,7 +60,7 @@ export default function DetalhesPokemon() {
 
   const [pokemon, setPokemon] = useState();
 
-  const getDetalhesPokemon = () => {
+  const getDetalhesPokemon = useCallback(() => {
     api
       .get(`/pokemon/${params.nome}`)
       .then(({ data }) => {
@@ -69,11 +69,11 @@ export default function DetalhesPokemon() {
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
-  };
+  }, [params.nome]);
 
   useEffect(() => {
     getDetalhesPokemon();
-  }, []);
+  }, [getDetalhesPokemon]);
 
   if (!pokemon) {
     return <h5 style={{ color: "white" }}>Pokemon não encontrado</h5>;
