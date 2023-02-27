@@ -86,7 +86,8 @@ export default function DetalhesPokemon() {
         color="Black"
         textAlign={"center"}
         paddingTop={"20px"}
-        text-transform={"capitalize"}
+        textTransform={"capitalize"}
+        fontFamily={"Tilt Warp, cursive"}
       >
         {pokemon.name}
       </Text>
@@ -114,7 +115,7 @@ export default function DetalhesPokemon() {
             />
             <CaracteristicasFisicasPokemon
               titulo={"Moves"}
-              valor={pokemon.base_experience}
+              valor={pokemon.moves.length}
             />
             <CaracteristicasFisicasPokemon
               titulo={"Types"}

@@ -3,8 +3,7 @@
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(25, 0, 116, 1) 50%,
-    rgba(240, 241, 242, 1) 100%
+    rgba(25, 0, 116, 1) 100%
   );
   /* min-height: 100vh; */
   height: 100vh;
